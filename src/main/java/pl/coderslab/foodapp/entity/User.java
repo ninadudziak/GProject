@@ -1,13 +1,17 @@
 package pl.coderslab.foodapp.entity;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +22,10 @@ public class User {
     private String username;
 
     @NotNull
+    @Size(min = 5, max = 30)
+    private String email;
+
+    @NotNull
     @Size(min = 6)
     private String password;
 
@@ -26,7 +34,10 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    public Set<Role> roles;
+
+    @ManyToMany
+    private List<Restaurant> restaurants = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -68,5 +79,21 @@ public class User {
         this.roles = roles;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRestaurants(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
+    }
 }
+
+
