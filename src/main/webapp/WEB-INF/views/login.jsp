@@ -13,10 +13,11 @@
 </head>
 <body>
 <form style="background-image: url('/images/South-Indian-Bruschetta-Recipe.jpg'); background-size: cover; background-repeat: no-repeat">
-    <div><label style="color: #d1ecf1"> User Name : <input type="text" name="username"/> </label></div>
-    <div><label style="color: #d1ecf1"> Password: <input type="password" name="password"/> </label></div>
-    <div> <input type="submit" value="Sign In"/></div>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <form method="post" action="/login">
+    <div><label style="color: #d1ecf1"> Nazwa Użytkownika : <input type="text" name="username"/> </label></div>
+    <div><label style="color: #d1ecf1"> Hasło: <input type="password" name="password"/> </label></div>
+    <div> <input type="submit" value="Send"/></div>
+    </form>
 </form>
 </body>
 </html>

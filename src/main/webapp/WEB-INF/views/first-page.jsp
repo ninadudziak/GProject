@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form"
+           uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,7 +19,7 @@
     <p>Zalogowany jako: <sec:authentication property="username"/></p>
 </sec:authorize>
 
-<p>To jest strona po logowaniu</p>
+
 
 <sec:authorize access="isAuthenticated()">
 <form action="<c:url value="/logout"/>" method="post">
