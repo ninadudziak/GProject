@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import pl.coderslab.foodapp.entity.User;
 import pl.coderslab.foodapp.repository.RestaurantRepository;
@@ -15,13 +16,14 @@ import java.util.List;
 
 @Controller
 @SessionAttributes("user")
-public class FirstPageController {
+@RequestMapping("/deskop")
+public class DeskopController {
 
     private final UserRepository userRepository;
     private final RestaurantRepository restaurantRepository;
 
     @Autowired
-    public FirstPageController(UserRepository userRepository, RestaurantRepository restaurantRepository) {
+    public DeskopController(UserRepository userRepository, RestaurantRepository restaurantRepository) {
         this.userRepository = userRepository;
         this.restaurantRepository = restaurantRepository;
     }

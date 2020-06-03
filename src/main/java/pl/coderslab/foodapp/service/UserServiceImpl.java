@@ -7,7 +7,6 @@ import pl.coderslab.foodapp.entity.User;
 import pl.coderslab.foodapp.repository.RoleRepository;
 import pl.coderslab.foodapp.repository.UserRepository;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 @Service
@@ -17,12 +16,14 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
+    public UserServiceImpl(UserRepository userRepository,
+                           RoleRepository roleRepository,
+                           BCryptPasswordEncoder passwordEncoder) {
+
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
-
 
     @Override
     public User findByUserName(String username) {
@@ -34,7 +35,17 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
         Role userRole = roleRepository.findByName("ROLE_USER");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        user.setRole(new HashSet<>(roleRepository.findAll()));
         userRepository.save(user);
+    }
+
+    @Override
+    public void autoLogin(String username, String password) {
+
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.delete(userRepository.findUserById(id));
     }
 }
