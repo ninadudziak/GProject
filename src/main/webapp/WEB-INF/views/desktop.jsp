@@ -19,9 +19,7 @@
     <p>Zalogowany jako: <sec:authentication property="username"/></p>
 </sec:authorize>
 
-
-
-<sec:authorize access="isAuthenticated()">
+<sec:authorize access="isAuthenticated()"><%--@elvariable id="_csrf" type="org.springframework.security.web.csrf.DefaultCsrfToken"--%>
 <form action="<c:url value="/logout"/>" method="post">
     <input class="fa fa-id-badge" type="submit" value="Wyloguj">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
